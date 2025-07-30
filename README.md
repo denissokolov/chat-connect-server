@@ -1,5 +1,7 @@
 # Chat Connect Server
 
+[![License](https://img.shields.io/github/license/denissokolov/chat-connect-web-extension.svg)](https://github.com/denissokolov/chat-connect-web-extension/blob/main/LICENSE)
+
 ## Prerequisites
 
 - Node.js (version 22 or higher)
