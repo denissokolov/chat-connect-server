@@ -1,6 +1,6 @@
 import { Controller, Post, Res, HttpException, HttpStatus, Req, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { Response as ExpressResponse } from 'express'
+import { FastifyReply, FastifyRequest } from 'fastify'
 
 @Controller('proxy/openai')
 export class OpenAIController {
@@ -10,7 +10,7 @@ export class OpenAIController {
   constructor(private readonly configService: ConfigService) {}
 
   @Post('responses')
-  async chatCompletions(@Req() req: Request, @Res() res: ExpressResponse): Promise<void> {
+  async chatCompletions(@Req() req: FastifyRequest, @Res() res: FastifyReply): Promise<void> {
     const apiKey = this.configService.get<string>('OPENAI_API_KEY')
     if (!apiKey) {
       throw new HttpException('OpenAI API key is not set', HttpStatus.UNAUTHORIZED)
@@ -31,9 +31,9 @@ export class OpenAIController {
       return
     }
 
-    res.setHeader('Content-Type', 'text/event-stream')
-    res.setHeader('Cache-Control', 'no-cache')
-    res.setHeader('Connection', 'keep-alive')
+    res.raw.setHeader('Content-Type', 'text/event-stream')
+    res.raw.setHeader('Cache-Control', 'no-cache')
+    res.raw.setHeader('Connection', 'keep-alive')
 
     const reader = response.body.getReader()
     const decoder = new TextDecoder()
@@ -43,12 +43,12 @@ export class OpenAIController {
         const { done, value } = await reader.read()
         if (done) break
         const chunk = decoder.decode(value, { stream: true })
-        res.write(chunk)
+        res.raw.write(chunk)
       }
     } catch (err) {
       this.logger.error('Error reading OpenAI stream', err)
     } finally {
-      res.end()
+      res.raw.end()
     }
   }
 }
