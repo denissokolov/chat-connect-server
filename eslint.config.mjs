@@ -3,12 +3,14 @@ import eslint from '@eslint/js'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
+import sonarjs from 'eslint-plugin-sonarjs'
 
 export default tseslint.config(
   { ignores: ['dist', 'node_modules', 'coverage'] },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   eslintPluginPrettierRecommended,
+  sonarjs.configs.recommended,
   {
     languageOptions: {
       globals: {
