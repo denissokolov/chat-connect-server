@@ -9,13 +9,15 @@
 
 ## Development
 
+Copy the `.env.example` file as `.env`, then provide values for all listed environment variables.
+
 Install dependencies
 
 ```bash
 npm install
 ```
 
-Run local server
+Run local server on http://localhost:3001
 
 ```bash
 npm run start:dev
