@@ -1,10 +1,11 @@
-import { Controller, Post, Res, HttpException, HttpStatus, Req } from '@nestjs/common'
+import { Controller, Post, Res, HttpException, HttpStatus, Req, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { Response as ExpressResponse } from 'express'
 
 @Controller('proxy/openai')
 export class OpenAIController {
   private readonly openaiApiUrl = 'https://api.openai.com/v1'
+  private readonly logger = new Logger(OpenAIController.name)
 
   constructor(private readonly configService: ConfigService) {}
 
@@ -45,9 +46,7 @@ export class OpenAIController {
         res.write(chunk)
       }
     } catch (err) {
-      // TODO: Replace with proper logging service
-      // eslint-disable-next-line no-console
-      console.error('Error reading OpenAI stream:', err)
+      this.logger.error('Error reading OpenAI stream', err)
     } finally {
       res.end()
     }
