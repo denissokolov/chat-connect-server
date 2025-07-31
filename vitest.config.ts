@@ -6,6 +6,14 @@ export default defineConfig({
   test: {
     globals: true,
     root: './',
+    coverage: {
+      enabled: false,
+      provider: 'v8',
+      reporter: ['text', 'json-summary', 'json', 'html'],
+      reportOnFailure: true,
+      exclude: ['**/*.d.ts', '**/*.spec.ts'],
+      include: ['src/**/*.ts'],
+    },
   },
   plugins: [
     swc.vite({
