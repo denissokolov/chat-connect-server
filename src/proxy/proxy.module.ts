@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common'
-import { OpenAIController } from './open-ai/openai.controller'
+import { ProxyController } from './proxy.controller'
 import { ConfigService } from '@nestjs/config'
+import { ProxyService } from './proxy.service'
+import { OpenAIService } from './openai/openai.service'
 
 @Module({
-  controllers: [OpenAIController],
-  providers: [ConfigService],
+  controllers: [ProxyController],
+  providers: [ConfigService, ProxyService, OpenAIService],
 })
 export class ProxyModule {}
