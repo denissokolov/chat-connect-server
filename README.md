@@ -1,6 +1,7 @@
 # Chat Connect Server
 
-[![License](https://img.shields.io/github/license/denissokolov/chat-connect-web-extension.svg)](https://github.com/denissokolov/chat-connect-web-extension/blob/main/LICENSE)
+[![CI workflow](https://github.com/denissokolov/chat-connect-server/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/denissokolov/chat-connect-server/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/denissokolov/chat-connect-server.svg)](https://github.com/denissokolov/chat-connect-server/blob/main/LICENSE)
 
 ## Prerequisites
 
